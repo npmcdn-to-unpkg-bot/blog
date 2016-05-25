@@ -47,10 +47,12 @@ class Blog(object):
             paths = map(lambda fn: os.path.join(dirpath, fn), filenames)
             posts = map(self.create_post, paths)
         for post in posts:
-            output = os.path.join(
-                self.config['build_dir'],
-                post.path,
-            ) + '.html'
+            post_dir = os.path.join(self.config['build_dir'], post.path)
+            try:
+                os.mkdir(post_dir)
+            except OSError:
+                pass
+            output = os.path.join(post_dir, 'index.html')
             with open(output, 'wb') as f:
                 f.write(self.render_post(post).encode('utf-8'))
             yield post
