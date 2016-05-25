@@ -51,13 +51,9 @@ Marketing beats quality. My hobo looking bird didn’t stand a chance with his
 straight rip assets from Flappy Bird. At least I got some sympathy and advice
 from Phaser’s author:
 
-> [@themarksteve](https://twitter.com/themarksteve) I can see why you’d be a
-bit pissed, but honestly turn it to your advantage. Claim back credit :)
-
+> [@themarksteve](https://twitter.com/themarksteve) I can see why you’d be a bit pissed, but honestly turn it to your advantage. Claim back credit :)
 >
-
-> — Richard Davey (@photonstorm) [February 14,
-2014](https://twitter.com/photonstorm/statuses/434171919399944193)
+> — Richard Davey (@photonstorm) [February 14, 2014](https://twitter.com/photonstorm/statuses/434171919399944193)
 
 So I end my rant here. It’s upsetting but that’s life. I didn’t really
 understand how indie game developers felt when they find clones of their games

@@ -9,11 +9,9 @@ So you’ve built your first web application in Python using
 shy so just to your friends. You got a $10 coupon for DigitalOcean from some
 guy in Twitter. Let’s use that. Now first things first: Create your droplet.
 
-#  [ ](http://blog.marksteve.com/feed?page=1#droplet-like-it39s-hot_1)Droplet
-like it’s hot
+### Droplet like it’s hot
 
-[![Create Droplet](https://svbtleusercontent.com/hyt74vbwvdgua_small.png)](htt
-ps://svbtleusercontent.com/hyt74vbwvdgua.png)
+[![Create Droplet](https://svbtleusercontent.com/hyt74vbwvdgua_small.png)](https://svbtleusercontent.com/hyt74vbwvdgua.png)
 
 Give your droplet a witty name. Select its size. My app just spits out “Hello,
 world” so I chose the cheapest one. If you have an RDB running, you might want
@@ -26,8 +24,7 @@ Debian guys. Finally, add your SSH key. I won’t be discussing how to do this
 manually in case you skip it. Click the big green “Create Droplet” button and
 ready your terminal for some SSH action.
 
-[![Droplet](https://svbtleusercontent.com/w6qtxxtu0hlvga_small.png)](https://s
-vbtleusercontent.com/w6qtxxtu0hlvga.png)
+[![Droplet](https://svbtleusercontent.com/w6qtxxtu0hlvga_small.png)](https://svbtleusercontent.com/w6qtxxtu0hlvga.png)
 
 So now you have a shiny new droplet. You’ll notice an IP address under your
 droplet’s host name. That’s your droplet’s public IP address. (There’s another
@@ -36,59 +33,51 @@ your droplet. Don’t use that.)
 
 Let’s SSH in:
 
-    
-    
-    ssh root@<DROPLET_PUBLIC_IP_ADDRESS>
-    # If you're not using default keys (id_rsa)
-    ssh root@<DROPLET_PUBLIC_IP_ADDRESS> -i <PATH_TO_PRIVATE_KEY>
-    
+```
+ssh root@<DROPLET_PUBLIC_IP_ADDRESS>
+# If you're not using default keys (id_rsa)
+ssh root@<DROPLET_PUBLIC_IP_ADDRESS> -i <PATH_TO_PRIVATE_KEY>
+```
 
 You’ll probably get something like this:
 
-    
-    
-    The authenticity of host '128.199.155.126 (128.199.155.126)' can't be established.
-    RSA key fingerprint is 4c:2c:77:83:e7:e6:05:af:17:d9:28:88:02:cd:7e:90.
-    Are you sure you want to continue connecting (yes/no)?
-    
+```
+The authenticity of host '128.199.155.126 (128.199.155.126)' can't be established.
+RSA key fingerprint is 4c:2c:77:83:e7:e6:05:af:17:d9:28:88:02:cd:7e:90.
+Are you sure you want to continue connecting (yes/no)?
 
 Type in `yes` if it shows the right fingerprint or if you don’t know what
 you’re doing. But seriously, you don’t need to worry about it for now.
+```
 
-#  [ ](http://blog.marksteve.com/feed?page=1#security_1)Security?
+### Security?
 
-    
-    
-    root@flask-app:~#
-    
+```
+root@flask-app:~#
+```
 
 Now we’re in. Notice that we’re signed in as `root`. We don’t want that but I
 want to keep this guide short and simple so we’ll be skipping some security
 measures. If you really want to know how to secure your server, check this
-out: [My First 5 Minutes On A Server; Or, Essential Security for Linux
-Servers](http://plusbryan.com/my-first-5-minutes-on-a-server-or-essential-
-security-for-linux-servers).
+out: [My First 5 Minutes On A Server; Or, Essential Security for Linux Servers](http://plusbryan.com/my-first-5-minutes-on-a-server-or-essential- security-for-linux-servers).
 
 We won’t be hardening security but we’re not savages. Let’s create a user that
 will run the app for us instead of running it with `root`.
 
-    
-    
-    useradd -r -m -s /bin/bash deploy
-    
+```
+useradd -r -m -s /bin/bash deploy
+```
 
-This creates a system user named `deploy` with a home directory and uses
-`bash` as default shell.
+This creates a system user named `deploy` with a home directory and uses `bash` as default shell.
 
-#  [ ](http://blog.marksteve.com/feed?page=1#python-tools_1)Python tools
+### Python tools
 
 On to the Python stuff. We need to install `pip` and `virtualenv`.
 
-    
-    
-    apt-get install python-setuptools
-    easy_install -U pip
-    
+```
+apt-get install python-setuptools
+easy_install -U pip
+```
 
 I bet you scratched your head after reading the commands above. _“Why is this
 dude telling me to install `setuptools` to install `pip`?”_ The answer is
@@ -97,74 +86,70 @@ simple: We want the latest and greatest `pip` version. We can get `pip` with
 writing, `python-pip` in DO’s APT repo is version `1.5.4-1` while latest one
 from PyPI is `1.5.6`.
 
-    
-    
-    pip install virtualenv
-    
+```
+pip install virtualenv
+```
 
 You must have encountered `virtualenv`s while working on your Flask app. If
-not, then you should start [reading about it](http://docs.python-
-guide.org/en/latest/dev/virtualenvs/) now. I’ll wait… Done? Great!
+not, then you should start [reading about it](http://docs.python-guide.org/en/latest/dev/virtualenvs/)
+now. I’ll wait… Done? Great!
 
-#  [ ](http://blog.marksteve.com/feed?page=1#your-code_1)Your code
+### Your code
 
 I’m assuming you’ve been pushing your code to a DVCS repo. Most likely with
 `git`. Maybe hosted in GitHub. DO’s Ubuntu image doesn’t have `git` installed
 by default:
 
-    
-    
-    apt-get install git
-    
+```
+apt-get install git
+```
 
 Before cloning your repo, let’s switch to the `deploy` user we created.
 
-    
-    
-    su - deploy
-    
+```
+su - deploy
+```
 
 Now let’s get your code. I’ll be cloning mine as an example:
 
-    
-    
-    git clone https://github.com/marksteve/flask-hello-world.git
-    cd flask-hello-world
-    
+```
+git clone https://github.com/marksteve/flask-hello-world.git
+cd flask-hello-world
+```
 
 My app repo looks like this:
 
-    
-    
-    ls
-    hello_world.py  requirements.txt
-    
+
+```
+ls
+hello_world.py  requirements.txt
+```
 
 I have my Flask app in `hello_world.py`:
 
-    
-    
-    from flask import Flask
-    
-    app = Flask(__name__)
-    
-    
-    @app.route("/")
-    def index():
-        return "Hello, world"
-    
-    
-    if __name__ == "__main__":
-        app.run(debug=True)
-    
+
+```
+from flask import Flask
+
+app = Flask(__name__)
+
+
+@app.route("/")
+def index():
+    return "Hello, world"
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
+```
 
 And a `requirements.txt` that lists my dependencies:
 
-    
-    
-    Flask
-    gunicorn
-    
+
+```
+Flask
+gunicorn
+```
 
 _Hold it… What the french is `gunicorn`?_
 
@@ -178,8 +163,7 @@ basically a spec written by Python peeps about how web servers and web
 applications written in Python should be communicating with each other.
 
 [Gunicorn](http://gunicorn.org/) is a WSGI server that’s quite easy to use and
-works out of the box. There are other [WSGI
-servers](http://wsgi.readthedocs.org/en/latest/servers.html) worth checking
+works out of the box. There are other [WSGI servers](http://wsgi.readthedocs.org/en/latest/servers.html) worth checking
 out but we’ll be sticking with Gunicorn because it’s the easiest to work with
 IMO.
 
@@ -187,11 +171,10 @@ Ok, back to the guide. We’re currently inside the code repo’s root (in my ca
 it’s `/home/deploy/flask-hello-world`). We’ll now create a `virtualenv` for
 our app:
 
-    
-    
-    virtualenv venv
-    source venv/bin/activate
-    
+```
+virtualenv venv
+source venv/bin/activate
+```
 
 > **NOTE**: You probably want your DVCS to ignore this `venv` folder. Or you
 could use `virtualenvwrapper`.
@@ -199,10 +182,9 @@ could use `virtualenvwrapper`.
 Now that we have our `virtualenv` activated, let’s install our Python
 packages:
 
-    
-    
-    pip install -r requirements.txt
-    
+```
+pip install -r requirements.txt
+```
 
 > **NOTE**: If you have packages that need dependencies installed with sudo
 access (e.g. Python package `MySQL-python` needs `libmysqlclient-dev` from
@@ -211,10 +193,9 @@ dropped back to your `root` session. Run `su - deploy` again to go back.
 
 You can now try running your app with Gunicorn:
 
-    
-    
-    gunicorn -b 0.0.0.0:8000 hello_world:app
-    
+```
+gunicorn -b 0.0.0.0:8000 hello_world:app
+```
 
 The command above runs `gunicorn` listening to any host at port `8000` using
 the WSGI app named `app` inside the `hello_world` module.
@@ -222,7 +203,7 @@ the WSGI app named `app` inside the `hello_world` module.
 You should be able to see your app working at
 `http://<DROPLET_PUBLIC_IP_ADDRESS>:8000`.
 
-#  [ ](http://blog.marksteve.com/feed?page=1#gunicorn-setup_1)Gunicorn setup
+### Gunicorn setup
 
 High five! Your server is up and running! But we have three problems here:
 
@@ -230,49 +211,46 @@ High five! Your server is up and running! But we have three problems here:
   2. Gunicorn isn’t running as a daemon. Close your shell session and your server dies.
   3. Gunicorn logs nothing (by default).
 
-##  [ ](http://blog.marksteve.com/feed?page=1#issue-1_2)Issue #1
+#### Issue #1
 
 There are two ways to address issue #1. We can run Gunicorn with sudo access
 so it can listen to port `80` or `443`. Or better, we can use Nginx as a
 reverse proxy to the Gunicorn server. Go back to your `root` session by
 hitting `Ctrl+D` and install Nginx:
 
-    
-    
-    apt-add-repository ppa:nginx/stable
-    apt-get update
-    apt-get install nginx
-    
+```
+apt-add-repository ppa:nginx/stable
+apt-get update
+apt-get install nginx
+```
 
 Now we need to configure Nginx to point to Gunicorn:
 
-    
-    
-    vim /etc/nginx/conf.d/flask-app.conf
-    
+```
+vim /etc/nginx/conf.d/flask-app.conf
+```
 
 Put this in the configuration file:
 
-    
-    
-    server {
-        listen 80;
-    
-        server_name _;
-    
-        access_log  /var/log/nginx/access.log;
-        error_log  /var/log/nginx/error.log;
-    
-        location / {
-            proxy_pass         http://127.0.0.1:8000/;
-            proxy_redirect     off;
-    
-            proxy_set_header   Host             $host;
-            proxy_set_header   X-Real-IP        $remote_addr;
-            proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
-        }
+```
+server {
+    listen 80;
+
+    server_name _;
+
+    access_log  /var/log/nginx/access.log;
+    error_log  /var/log/nginx/error.log;
+
+    location / {
+        proxy_pass         http://127.0.0.1:8000/;
+        proxy_redirect     off;
+
+        proxy_set_header   Host             $host;
+        proxy_set_header   X-Real-IP        $remote_addr;
+        proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
     }
-    
+}
+```
 
 > **NOTE**: If you’ve pointed a domain to your DO’s public IP address, replace
 `server_name`’s value with that domain name. (e.g. `server_name
@@ -280,34 +258,30 @@ marksteve.com`)
 
 We also need to disable the default Nginx welcome page.
 
-    
-    
-    vim /etc/nginx/nginx.conf
-    
+```
+vim /etc/nginx/nginx.conf
+```
 
 Comment out the line:
 
-    
-    
-    include /etc/nginx/sites-enabled/*;
-    
+```
+include /etc/nginx/sites-enabled/*;
+```
 
 Tell Nginx to reload its config to apply our changes.
 
-    
-    
-    service nginx reload
-    
+```
+service nginx reload
+```
 
 Go back to your app’s `virtualenv` and try running `gunicorn` again.
 
-    
-    
-    su - deploy
-    cd flask-hello-world
-    source venv/bin/activate
-    gunicorn hello_world:app
-    
+```
+su - deploy
+cd flask-hello-world
+source venv/bin/activate
+gunicorn hello_world:app
+```
 
 Notice that we didn’t set an address for Gunicorn to bind to. By default
 Gunicorn binds to `127.0.0.1:8000` which is the address we pointed Nginx to.
@@ -315,30 +289,27 @@ Gunicorn binds to `127.0.0.1:8000` which is the address we pointed Nginx to.
 Try going to `http://<DROPLET_PUBLIC_IP_ADDRESS>`. You should be seeing your
 app working. Look ‘ma! No more port numbers in the address bar!
 
-##  [ ](http://blog.marksteve.com/feed?page=1#issue-2_2)Issue #2
+#### Issue #2
 
 Easy. Just add `-D/--daemon` to your `gunicorn` arguments.
 
-    
-    
-    gunicorn -D hello_world:app
-    
+```
+gunicorn -D hello_world:app
+```
 
 How do you kill it?
 
-    
-    
-    killall gunicorn
-    
+```
+killall gunicorn
+```
 
 What if you just want to reload your app after pulling some changes?
 
-    
-    
-    killall -HUP gunicorn
-    
+```
+killall -HUP gunicorn
+```
 
-##  [ ](http://blog.marksteve.com/feed?page=1#issue-3_2)Issue #3
+#### Issue #3
 
 Another easy one. Add arguments `--access-logfile FILE` for access logs and
 `--error-logfile FILE` for error logs. You can set `FILE` to `-` to write to
@@ -347,25 +318,23 @@ Another easy one. Add arguments `--access-logfile FILE` for access logs and
 `gunicorn` accepts config files so you don’t have to write these arguments
 down everytime.
 
-    
-    
-    daemon = True
-    accesslog = "logs/access.log"
-    errorlog = "logs/error.log"
-    
+```
+daemon = True
+accesslog = "logs/access.log"
+errorlog = "logs/error.log"
+```
 
 Save this as `gunicorn.conf.py` and tell Gunicorn to use it as its config
 file.
 
-    
-    
-    gunicorn -c gunicorn.conf.py hello_world:app
-    
+```
+gunicorn -c gunicorn.conf.py hello_world:app
+```
 
 Gunicorn has a bunch of other configuration options you can find
 [here](http://docs.gunicorn.org/en/develop/configure.html).
 
-#  [ ](http://blog.marksteve.com/feed?page=1#recap_1)Recap
+### Recap
 
 By now you should know how to:
 

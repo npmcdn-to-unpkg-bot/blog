@@ -18,11 +18,10 @@ filesystem when exported. He also gave me a tip: link the volume to the
 container and tar it up. Which kinda looks like this if you do it from the
 docker cli:
 
-    
-    
-    #!/bin/bash
-    sudo docker run -rm -i -volumes-from ghost-mysql ubuntu tar -cz /var/lib/mysql > ~/backups/ghost-mysql-`date +%s`.tgz
-    
+```
+#!/bin/bash
+sudo docker run -rm -i -volumes-from ghost-mysql ubuntu tar -cz /var/lib/mysql > ~/backups/ghost-mysql-`date +%s`.tgz
+```
 
 Good thing I suck at blogging and only have three measly posts. Also,
 [Cloudflare](https://www.cloudflare.com/) was kind enough to cache my pages so
