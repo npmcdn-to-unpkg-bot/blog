@@ -14,8 +14,10 @@ def main():
             id = entry.link.rsplit('/', 1)[1]
             body = html2text(entry.content[0]['value'])
             title = entry.title
-            publish_date = '-'.join(map(str, entry.published_parsed[:3]))
-            post = frontmatter.Post(body, title=title, publish_date=publish_date)
+            y, m, d = entry.published_parsed[:3]
+            publish_date = '{}-{:02d}-{:02d}'.format(y, m, d)
+            post = frontmatter.Post(body, title=title,
+                                    publish_date=publish_date)
             with open('posts/{}.md'.format(id), 'wb') as f:
                 f.write(frontmatter.dumps(post).encode('utf8'))
         page += 1

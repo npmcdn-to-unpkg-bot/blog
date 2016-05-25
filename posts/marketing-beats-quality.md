@@ -1,5 +1,5 @@
 ---
-publish_date: 2014-2-17
+publish_date: '2014-02-17'
 title: Marketing beats quality
 ---
 

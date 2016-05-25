@@ -1,5 +1,5 @@
 ---
-publish_date: 2014-1-23
+publish_date: '2014-01-23'
 title: Backing up Docker volumes
 ---
 

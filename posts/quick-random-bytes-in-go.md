@@ -1,5 +1,5 @@
 ---
-publish_date: 2014-9-23
+publish_date: '2014-09-23'
 title: Quick random bytes in Go
 ---
 

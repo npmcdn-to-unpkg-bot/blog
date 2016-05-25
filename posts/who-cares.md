@@ -1,5 +1,5 @@
 ---
-publish_date: 2014-1-12
+publish_date: '2014-01-12'
 title: Who cares?
 ---
 

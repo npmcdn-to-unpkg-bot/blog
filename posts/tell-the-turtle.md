@@ -1,5 +1,5 @@
 ---
-publish_date: 2014-9-26
+publish_date: '2014-09-26'
 title: Tell the turtle
 ---
 

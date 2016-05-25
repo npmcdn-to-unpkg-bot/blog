@@ -1,5 +1,5 @@
 ---
-publish_date: 2014-1-1
+publish_date: '2014-01-01'
 title: '2013: Lots of firsts'
 ---
 

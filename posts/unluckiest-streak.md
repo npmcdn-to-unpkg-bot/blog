@@ -1,5 +1,5 @@
 ---
-publish_date: 2014-5-5
+publish_date: '2014-05-05'
 title: Unluckiest Streak
 ---
 

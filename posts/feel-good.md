@@ -1,5 +1,5 @@
 ---
-publish_date: 2016-4-9
+publish_date: '2016-04-09'
 title: Feel Good
 ---
 

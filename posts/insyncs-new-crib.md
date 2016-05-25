@@ -1,5 +1,5 @@
 ---
-publish_date: 2015-3-16
+publish_date: '2015-03-16'
 title: Insync's new crib
 ---
 

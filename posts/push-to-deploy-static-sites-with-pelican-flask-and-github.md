@@ -1,5 +1,5 @@
 ---
-publish_date: 2014-1-5
+publish_date: '2014-01-05'
 title: Push-to-deploy static sites with Pelican, Flask and Github
 ---
 

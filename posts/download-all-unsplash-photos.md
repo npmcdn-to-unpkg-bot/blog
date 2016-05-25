@@ -1,5 +1,5 @@
 ---
-publish_date: 2014-3-19
+publish_date: '2014-03-19'
 title: Download all Unsplash photos
 ---
 

@@ -1,5 +1,5 @@
 ---
-publish_date: 2015-5-11
+publish_date: '2015-05-11'
 title: SVI
 ---
 

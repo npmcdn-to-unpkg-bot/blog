@@ -1,5 +1,5 @@
 ---
-publish_date: 2015-2-19
+publish_date: '2015-02-19'
 title: Ragnarok
 ---
 

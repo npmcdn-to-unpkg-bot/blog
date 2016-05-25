@@ -1,5 +1,5 @@
 ---
-publish_date: 2014-5-11
+publish_date: '2014-05-11'
 title: First Hackathon of the Year
 ---
 

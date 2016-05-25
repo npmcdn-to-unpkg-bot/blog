@@ -1,5 +1,5 @@
 ---
-publish_date: 2014-4-2
+publish_date: '2014-04-02'
 title: CE 199 Model Renders
 ---
 

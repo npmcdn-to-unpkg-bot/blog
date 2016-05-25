@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<ul class="list-reset">
+  {% for post in posts %}
+  <li>
+    <small>{{ post.metadata.publish_date }}</small>
+    <a href="{{ post.path }}">{{ post.metadata.title }}</a>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}
+
