@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
-  <h2>{{ post.metadata.title }}</h2>
+  <h2 class="mb0">{{ post.metadata.title }}</h2>
+  <p class="mt0">
+    <small>Published on {{ post.metadata.publish_date }}</small>
+  </p>
   {{ post }}
 {% endblock %}
 
