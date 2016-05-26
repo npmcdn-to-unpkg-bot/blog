@@ -42,7 +42,7 @@ class Blog(object):
             loader=FileSystemLoader(self.config['layouts_dir']),
         )
 
-    def generate_posts(self):
+    def write_posts(self):
         for dirpath, _, filenames in os.walk(self.config['posts_dir']):
             paths = map(lambda fn: os.path.join(dirpath, fn), filenames)
             posts = map(self.create_post, paths)
@@ -67,7 +67,7 @@ class Blog(object):
         template = self.env.get_template(layout)
         return template.render(post=post)
 
-    def generate_index(self, posts):
+    def write_index(self, posts):
         output = os.path.join(self.config['build_dir'], 'index.html')
         with open(output, 'wb') as f:
             f.write(self.render_index(posts).encode('utf-8'))
@@ -87,16 +87,16 @@ def cli(ctx):
 
 @cli.command()
 @click.pass_context
-def generate(ctx):
+def build(ctx):
     blog = ctx.obj
     click.secho("Generating posts...", fg='yellow')
-    posts = blog.generate_posts()
+    posts = blog.write_posts()
     rendered_posts = []
     for post in posts:
         click.secho("Wrote {}".format(post.path), fg='green')
         rendered_posts.append(post)
     click.secho("Generating index...", fg='yellow')
-    blog.generate_index(rendered_posts)
+    blog.write_index(rendered_posts)
     click.secho("Done!", fg='green')
 
 
