@@ -119,9 +119,8 @@ def build(ctx):
 
 @cli.command()
 @click.pass_context
-def deploy(ctx):
-    # TODO:
-    # - [ ] Commit message
+@click.option('-m', '--message', default="Update build", help="Commit message.")
+def deploy(ctx, message):
     blog = ctx.obj
     branch = blog.config['remote_branch']
     click.secho("Checking out {}...".format(branch), fg='yellow')
@@ -129,17 +128,21 @@ def deploy(ctx):
     click.secho(tmpdir, fg='green')
     try:
         repo = Repo.clone_from(blog.config['remote_url'], tmpdir,
-                               branch='gh-pages')
+                               branch=branch)
     except GitCommandError:
         repo = Repo.init(tmpdir)
-        repo.git.checkout(b='gh-pages')
+        repo.git.checkout(b=branch)
     click.secho("Updating build...", fg='yellow')
     copy_tree(blog.config['build_dir'], tmpdir)
     repo.git.add(A=True)
-    repo.index.commit("Update build")
+    # FIXME: Prevent empty commits
+    repo.index.commit(message)
     click.secho("Pushing updates...", fg='yellow')
-    remote = repo.create_remote('origin', blog.config['remote_url'])
-    remote.push('gh-pages')
+    if repo.remotes.origin.exists():
+        remote = repo.remotes.origin
+    else:
+        remote = repo.create_remote('origin', blog.config['remote_url'])
+    remote.push(branch)
     click.secho("Done!", fg='green')
 
 
