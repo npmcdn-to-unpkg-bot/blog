@@ -1,5 +1,6 @@
 click
 feedparser
+gitpython
 html2text
 jinja2
 mistune

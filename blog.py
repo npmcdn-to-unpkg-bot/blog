@@ -1,11 +1,14 @@
 import os
-import shutil
+import tempfile
+from distutils.dir_util import copy_tree
 
 import mistune
 from jinja2 import Environment, FileSystemLoader
 
 import click
 import frontmatter
+from git import Repo
+from git.exc import GitCommandError
 
 
 class Post(object):
@@ -40,6 +43,9 @@ class Blog(object):
         self.config.setdefault('layouts_dir', './layouts')
         self.config.setdefault('assets_dir', './assets')
         self.config.setdefault('build_dir', './build')
+        self.config.setdefault('remote_branch', 'gh-pages')
+        self.config.setdefault(
+            'remote_url', 'git@github.com:marksteve/blog.git')
         self.env = Environment(
             loader=FileSystemLoader(self.config['layouts_dir']),
         )
@@ -85,8 +91,7 @@ class Blog(object):
                                   self.config['assets_dir'])
         if output_dir.strip() == '/':
             raise RuntimeError
-        shutil.rmtree(output_dir)
-        shutil.copytree(self.config['assets_dir'], output_dir)
+        copy_tree(self.config['assets_dir'], output_dir)
 
 
 @click.group()
@@ -109,6 +114,32 @@ def build(ctx):
     blog.write_index(rendered_posts)
     click.secho("Copying assets...", fg='yellow')
     blog.copy_assets()
+    click.secho("Done!", fg='green')
+
+
+@cli.command()
+@click.pass_context
+def deploy(ctx):
+    # TODO:
+    # - [ ] Commit message
+    blog = ctx.obj
+    branch = blog.config['remote_branch']
+    click.secho("Checking out {}...".format(branch), fg='yellow')
+    tmpdir = tempfile.mkdtemp()
+    click.secho(tmpdir, fg='green')
+    try:
+        repo = Repo.clone_from(blog.config['remote_url'], tmpdir,
+                               branch='gh-pages')
+    except GitCommandError:
+        repo = Repo.init(tmpdir)
+        repo.git.checkout(b='gh-pages')
+    click.secho("Updating build...", fg='yellow')
+    copy_tree(blog.config['build_dir'], tmpdir)
+    repo.git.add(A=True)
+    repo.index.commit("Update build")
+    click.secho("Pushing updates...", fg='yellow')
+    remote = repo.create_remote('origin', blog.config['remote_url'])
+    remote.push('gh-pages')
     click.secho("Done!", fg='green')
 
 
