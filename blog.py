@@ -138,7 +138,7 @@ def deploy(ctx, message):
     # FIXME: Prevent empty commits
     repo.index.commit(message)
     click.secho("Pushing updates...", fg='yellow')
-    if repo.remotes.origin.exists():
+    if repo.remotes and repo.remotes.origin.exists():
         remote = repo.remotes.origin
     else:
         remote = repo.create_remote('origin', blog.config['remote_url'])
