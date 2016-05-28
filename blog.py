@@ -1,4 +1,5 @@
 import os
+import shutil
 
 import mistune
 from jinja2 import Environment, FileSystemLoader
@@ -37,6 +38,7 @@ class Blog(object):
         self.config = config
         self.config.setdefault('posts_dir', './posts')
         self.config.setdefault('layouts_dir', './layouts')
+        self.config.setdefault('assets_dir', './assets')
         self.config.setdefault('build_dir', './build')
         self.env = Environment(
             loader=FileSystemLoader(self.config['layouts_dir']),
@@ -78,6 +80,14 @@ class Blog(object):
         template = self.env.get_template('index.html')
         return template.render(posts=posts)
 
+    def copy_assets(self):
+        output_dir = os.path.join(self.config['build_dir'],
+                                  self.config['assets_dir'])
+        if output_dir.strip() == '/':
+            raise RuntimeError
+        shutil.rmtree(output_dir)
+        shutil.copytree(self.config['assets_dir'], output_dir)
+
 
 @click.group()
 @click.pass_context
@@ -97,6 +107,8 @@ def build(ctx):
         rendered_posts.append(post)
     click.secho("Generating index...", fg='yellow')
     blog.write_index(rendered_posts)
+    click.secho("Copying assets...", fg='yellow')
+    blog.copy_assets()
     click.secho("Done!", fg='green')
 
 
