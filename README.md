@@ -23,6 +23,18 @@ Glued in pieces that makes my blog:
   For deploying to gh-pages
 
 
+## Usage
+
+Not for public consumption but suit yourself:
+
+```
+virtualenv venv
+mkdir {build,assets}
+venv/bin/pip install -r requirements.txt
+venv/bin/python blog.py
+```
+
+
 ## License
 
 [MIT](https://marksteve.mit-license.org)
