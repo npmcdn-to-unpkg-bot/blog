@@ -19,13 +19,20 @@
     h1 a:visited, h2 a:visited { color: inherit; }
   </style>
 <body>
-  <div class="max-width-3 mx-auto p2">
-    <h1 class="regular border-bottom flex flex-wrap justify-between items-baseline">
-      <a class="lg-col-6 col-12" href="/">Pardon my <em>php</em></a>
-      <span class="h4 lg-col-6 col-12 right-align">
+  <main class="max-width-3 mx-auto p2">
+    <header class="border-bottom flex flex-wrap justify-between items-baseline">
+      <h1 class="regular lg-col-6 col-12 mb0">
+        <a href="/">Pardon my <em>php</em></a>
+      </h1>
+      <div class="lg-col-6 col-12 right-align">
         Ramblings from a web developer
-      </span>
-    </h1>
+      </div>
+    </header>
     {% block content %}{% endblock %}
-  </div>
+    <footer class="border-top mt4">
+      <small>
+        Headings: Essonnes Display, Body: Franklin Gothic URW, Monospace: Inconsolata
+      </small>
+    </footer>
+  </main>
 
