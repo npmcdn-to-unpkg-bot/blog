@@ -2,25 +2,25 @@
 
 Glued in pieces that makes my blog:
 
-- click
+- __click__
 
   CLI action
 
-- gitpython
+- __python-frontmatter__
 
-  For deploying to gh-pages
+  Metadata handling
 
-- jinja2
+- __jinja2__
 
   So I don't need to type things over and over again
 
-- mistune
+- __mistune__
 
   Everybody loves markdown
 
-- python-frontmatter
+- __gitpython__
 
-  Metadata handling
+  For deploying to gh-pages
 
 
 ## License
