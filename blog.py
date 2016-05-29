@@ -44,8 +44,9 @@ class Blog(object):
         self.config.setdefault('assets_dir', './assets')
         self.config.setdefault('build_dir', './build')
         self.config.setdefault('remote_branch', 'gh-pages')
-        self.config.setdefault(
-            'remote_url', 'git@github.com:marksteve/blog.git')
+        self.config.setdefault('remote_url',
+                               'git@github.com:marksteve/blog.git')
+        self.config.setdefault('cname_host', 'blog.marksteve.com')
         self.env = Environment(
             loader=FileSystemLoader(self.config['layouts_dir']),
         )
@@ -93,6 +94,10 @@ class Blog(object):
             raise RuntimeError
         copy_tree(self.config['assets_dir'], output_dir)
 
+    def write_cname(self):
+        with open(os.path.join(self.config['build_dir'], 'CNAME'), 'wb') as f:
+            f.write(self.config['cname_host'])
+
 
 @click.group()
 @click.pass_context
@@ -114,6 +119,8 @@ def build(ctx):
     blog.write_index(rendered_posts)
     click.secho("Copying assets...", fg='yellow')
     blog.copy_assets()
+    click.secho("Generating CNAME...", fg='yellow')
+    blog.write_cname()
     click.secho("Done!", fg='green')
 
 
