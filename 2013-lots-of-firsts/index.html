@@ -6,6 +6,7 @@
   <script>try{Typekit.load({ async: true });}catch(e){}</script>
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css">
   <link rel="stylesheet" href="//npmcdn.com/basscss@8.0.1/css/basscss.min.css">
+  <link rel="stylesheet" href="//s3-us-west-2.amazonaws.com/colors-css/2.2.0/colors.min.css">
   <style>
     body { font: 20px/1.5 franklin-gothic-urw, sans-serif; }
     h1, h2, h3, h4, h5, h6, blockquote { font-family: essonnes-display; }
@@ -20,12 +21,14 @@
   </style>
 <body>
   <div class="max-width-3 mx-auto p2">
-    <h1 class="regular border-bottom flex flex-wrap justify-between items-baseline">
-      <a class="lg-col-6 col-12" href="/">Pardon my <em>php</em></a>
-      <span class="h4 lg-col-6 col-12 right-align">
+    <header class="border-bottom flex flex-wrap justify-between items-baseline">
+      <h1 class="regular lg-col-6 col-12 mb0">
+        <a href="/">Pardon my <em>php</em></a>
+      </h1>
+      <div class="lg-col-6 col-12 right-align">
         Ramblings from a web developer
-      </span>
-    </h1>
+      </div>
+    </header>
     
   <h2 class="mb0">2013: Lots of firsts</h2>
   <p class="mt0">
@@ -60,4 +63,9 @@ more interesting challenges this 2014.</p>
 <p>Happy new year!</p>
 
 
+    <footer class="border-top mt4">
+      <small>
+        Headings: Essonnes Display, Body: Franklin Gothic URW, Monospace: Inconsolata
+      </small>
+    </footer>
   </div>
