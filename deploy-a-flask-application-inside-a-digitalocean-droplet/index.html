@@ -1,0 +1,269 @@
+<!doctype html>
+<html>
+<head>
+  <title>Pardon my PHP</title>
+  <script src="https://use.typekit.net/ixq4oeo.js"></script>
+  <script>try{Typekit.load({ async: true });}catch(e){}</script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css">
+  <link rel="stylesheet" href="//npmcdn.com/basscss@8.0.1/css/basscss.min.css">
+  <style>
+    body { font: 20px/1.5 franklin-gothic-urw, sans-serif; }
+    h1, h2, h3, h4, h5, h6, blockquote { font-family: essonnes-display; }
+    blockquote { margin: 0; padding: 0 1.5em; }
+    pre { background: #eee; overflow-y: auto; padding: .5em; }
+    code { background: #eee; font-family: inconsolata, monospace; }
+    img { max-width: 100%; }
+    a { color: #3d9970; }
+    a:visited { color: #aaa; }
+    h1 a, h2 a { color: inherit; text-decoration: none; }
+    h1 a:visited, h2 a:visited { color: inherit; }
+  </style>
+<body>
+  <div class="max-width-3 mx-auto p2">
+    <h1 class="regular border-bottom flex flex-wrap justify-between items-baseline">
+      <a class="lg-col-6 col-12" href="/">Pardon my <em>php</em></a>
+      <span class="h4 lg-col-6 col-12 right-align">
+        Ramblings from a web developer
+      </span>
+    </h1>
+    
+  <h2 class="mb0">Deploying a Flask application inside a DigitalOcean droplet</h2>
+  <p class="mt0">
+    <small>Published on 2014-12-14</small>
+  </p>
+  <p>So you’ve built your first web application in Python using
+<a href="http://flask.pocoo.org">Flask</a>. It works great in your
+<code>http://localhost:5000</code>. Now you want to show it to the world. Or maybe you’re
+shy so just to your friends. You got a $10 coupon for DigitalOcean from some
+guy in Twitter. Let’s use that. Now first things first: Create your droplet.</p>
+<h3>Droplet like it’s hot</h3>
+<p><a href="https://svbtleusercontent.com/hyt74vbwvdgua.png"><img src="https://svbtleusercontent.com/hyt74vbwvdgua_small.png" alt="Create Droplet"></a></p>
+<p>Give your droplet a witty name. Select its size. My app just spits out “Hello,
+world” so I chose the cheapest one. If you have an RDB running, you might want
+to chose a bigger size. Choose a region near your target audience. I didn’t
+tick off any of the available settings since I’m deploying a very simple (and
+useless) app. Select an image for your droplet. I chose the latest Ubuntu
+stable release (14.04) and I’ll be basing the succeeding instructions from it.
+Steps for other distros won’t be that different though. Especially for the
+Debian guys. Finally, add your SSH key. I won’t be discussing how to do this
+manually in case you skip it. Click the big green “Create Droplet” button and
+ready your terminal for some SSH action.</p>
+<p><a href="https://svbtleusercontent.com/w6qtxxtu0hlvga.png"><img src="https://svbtleusercontent.com/w6qtxxtu0hlvga_small.png" alt="Droplet"></a></p>
+<p>So now you have a shiny new droplet. You’ll notice an IP address under your
+droplet’s host name. That’s your droplet’s public IP address. (There’s another
+address that will show up if you ticked “Private Networking” while creating
+your droplet. Don’t use that.)</p>
+<p>Let’s SSH in:</p>
+<pre><code>ssh root@&lt;DROPLET_PUBLIC_IP_ADDRESS&gt;
+# If you're not using default keys (id_rsa)
+ssh root@&lt;DROPLET_PUBLIC_IP_ADDRESS&gt; -i &lt;PATH_TO_PRIVATE_KEY&gt;
+</code></pre>
+<p>You’ll probably get something like this:</p>
+<pre><code>The authenticity of host '128.199.155.126 (128.199.155.126)' can't be established.
+RSA key fingerprint is 4c:2c:77:83:e7:e6:05:af:17:d9:28:88:02:cd:7e:90.
+Are you sure you want to continue connecting (yes/no)?
+
+Type in `yes` if it shows the right fingerprint or if you don’t know what
+you’re doing. But seriously, you don’t need to worry about it for now.
+</code></pre>
+<h3>Security?</h3>
+<pre><code>root@flask-app:~#
+</code></pre>
+<p>Now we’re in. Notice that we’re signed in as <code>root</code>. We don’t want that but I
+want to keep this guide short and simple so we’ll be skipping some security
+measures. If you really want to know how to secure your server, check this
+out: <a href="http://plusbryan.com/my-first-5-minutes-on-a-server-or-essential- security-for-linux-servers">My First 5 Minutes On A Server; Or, Essential Security for Linux Servers</a>.</p>
+<p>We won’t be hardening security but we’re not savages. Let’s create a user that
+will run the app for us instead of running it with <code>root</code>.</p>
+<pre><code>useradd -r -m -s /bin/bash deploy
+</code></pre>
+<p>This creates a system user named <code>deploy</code> with a home directory and uses <code>bash</code> as default shell.</p>
+<h3>Python tools</h3>
+<p>On to the Python stuff. We need to install <code>pip</code> and <code>virtualenv</code>.</p>
+<pre><code>apt-get install python-setuptools
+easy_install -U pip
+</code></pre>
+<p>I bet you scratched your head after reading the commands above. <em>“Why is this
+dude telling me to install <code>setuptools</code> to install <code>pip</code>?”</em> The answer is
+simple: We want the latest and greatest <code>pip</code> version. We can get <code>pip</code> with
+<code>apt-get install python-pip</code> but it would install an older version. i.e. As of
+writing, <code>python-pip</code> in DO’s APT repo is version <code>1.5.4-1</code> while latest one
+from PyPI is <code>1.5.6</code>.</p>
+<pre><code>pip install virtualenv
+</code></pre>
+<p>You must have encountered <code>virtualenv</code>s while working on your Flask app. If
+not, then you should start <a href="http://docs.python-guide.org/en/latest/dev/virtualenvs/">reading about it</a>
+now. I’ll wait… Done? Great!</p>
+<h3>Your code</h3>
+<p>I’m assuming you’ve been pushing your code to a DVCS repo. Most likely with
+<code>git</code>. Maybe hosted in GitHub. DO’s Ubuntu image doesn’t have <code>git</code> installed
+by default:</p>
+<pre><code>apt-get install git
+</code></pre>
+<p>Before cloning your repo, let’s switch to the <code>deploy</code> user we created.</p>
+<pre><code>su - deploy
+</code></pre>
+<p>Now let’s get your code. I’ll be cloning mine as an example:</p>
+<pre><code>git clone https://github.com/marksteve/flask-hello-world.git
+cd flask-hello-world
+</code></pre>
+<p>My app repo looks like this:</p>
+<pre><code>ls
+hello_world.py  requirements.txt
+</code></pre>
+<p>I have my Flask app in <code>hello_world.py</code>:</p>
+<pre><code>from flask import Flask
+
+app = Flask(__name__)
+
+
+@app.route("/")
+def index():
+    return "Hello, world"
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
+</code></pre>
+<p>And a <code>requirements.txt</code> that lists my dependencies:</p>
+<pre><code>Flask
+gunicorn
+</code></pre>
+<p><em>Hold it… What the french is <code>gunicorn</code>?</em></p>
+<p>Glad you asked. You see, Flask apps are actually WSGI apps so you can run them
+using WSGI servers.</p>
+<p><em>Uhm… W-S-G-I?</em></p>
+<p>It’s pronounced <em>wizgy</em>. <a href="http://wsgi.readthedocs.org/en/latest/">WSGI</a> is
+basically a spec written by Python peeps about how web servers and web
+applications written in Python should be communicating with each other.</p>
+<p><a href="http://gunicorn.org/">Gunicorn</a> is a WSGI server that’s quite easy to use and
+works out of the box. There are other <a href="http://wsgi.readthedocs.org/en/latest/servers.html">WSGI servers</a> worth checking
+out but we’ll be sticking with Gunicorn because it’s the easiest to work with
+IMO.</p>
+<p>Ok, back to the guide. We’re currently inside the code repo’s root (in my case
+it’s <code>/home/deploy/flask-hello-world</code>). We’ll now create a <code>virtualenv</code> for
+our app:</p>
+<pre><code>virtualenv venv
+source venv/bin/activate
+</code></pre>
+<blockquote><p><strong>NOTE</strong>: You probably want your DVCS to ignore this <code>venv</code> folder. Or you
+could use <code>virtualenvwrapper</code>.</p>
+</blockquote>
+<p>Now that we have our <code>virtualenv</code> activated, let’s install our Python
+packages:</p>
+<pre><code>pip install -r requirements.txt
+</code></pre>
+<blockquote><p><strong>NOTE</strong>: If you have packages that need dependencies installed with sudo
+access (e.g. Python package <code>MySQL-python</code> needs <code>libmysqlclient-dev</code> from
+APT), just press <code>Ctrl+D</code> to logout from the <code>deploy</code> user session. You’ll be
+dropped back to your <code>root</code> session. Run <code>su - deploy</code> again to go back.</p>
+</blockquote>
+<p>You can now try running your app with Gunicorn:</p>
+<pre><code>gunicorn -b 0.0.0.0:8000 hello_world:app
+</code></pre>
+<p>The command above runs <code>gunicorn</code> listening to any host at port <code>8000</code> using
+the WSGI app named <code>app</code> inside the <code>hello_world</code> module.</p>
+<p>You should be able to see your app working at
+<code>http://&lt;DROPLET_PUBLIC_IP_ADDRESS&gt;:8000</code>.</p>
+<h3>Gunicorn setup</h3>
+<p>High five! Your server is up and running! But we have three problems here:</p>
+<ol>
+<li>We probably want people to access our app using port <code>80</code> or <code>443</code> (i.e. not needing to type in the port number used).</li>
+<li>Gunicorn isn’t running as a daemon. Close your shell session and your server dies.</li>
+<li>Gunicorn logs nothing (by default).</li>
+</ol>
+<h4>Issue #1</h4>
+<p>There are two ways to address issue #1. We can run Gunicorn with sudo access
+so it can listen to port <code>80</code> or <code>443</code>. Or better, we can use Nginx as a
+reverse proxy to the Gunicorn server. Go back to your <code>root</code> session by
+hitting <code>Ctrl+D</code> and install Nginx:</p>
+<pre><code>apt-add-repository ppa:nginx/stable
+apt-get update
+apt-get install nginx
+</code></pre>
+<p>Now we need to configure Nginx to point to Gunicorn:</p>
+<pre><code>vim /etc/nginx/conf.d/flask-app.conf
+</code></pre>
+<p>Put this in the configuration file:</p>
+<pre><code>server {
+    listen 80;
+
+    server_name _;
+
+    access_log  /var/log/nginx/access.log;
+    error_log  /var/log/nginx/error.log;
+
+    location / {
+        proxy_pass         http://127.0.0.1:8000/;
+        proxy_redirect     off;
+
+        proxy_set_header   Host             $host;
+        proxy_set_header   X-Real-IP        $remote_addr;
+        proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
+    }
+}
+</code></pre>
+<blockquote><p><strong>NOTE</strong>: If you’ve pointed a domain to your DO’s public IP address, replace
+<code>server_name</code>’s value with that domain name. (e.g. <code>server_name
+marksteve.com</code>)</p>
+</blockquote>
+<p>We also need to disable the default Nginx welcome page.</p>
+<pre><code>vim /etc/nginx/nginx.conf
+</code></pre>
+<p>Comment out the line:</p>
+<pre><code>include /etc/nginx/sites-enabled/*;
+</code></pre>
+<p>Tell Nginx to reload its config to apply our changes.</p>
+<pre><code>service nginx reload
+</code></pre>
+<p>Go back to your app’s <code>virtualenv</code> and try running <code>gunicorn</code> again.</p>
+<pre><code>su - deploy
+cd flask-hello-world
+source venv/bin/activate
+gunicorn hello_world:app
+</code></pre>
+<p>Notice that we didn’t set an address for Gunicorn to bind to. By default
+Gunicorn binds to <code>127.0.0.1:8000</code> which is the address we pointed Nginx to.</p>
+<p>Try going to <code>http://&lt;DROPLET_PUBLIC_IP_ADDRESS&gt;</code>. You should be seeing your
+app working. Look ‘ma! No more port numbers in the address bar!</p>
+<h4>Issue #2</h4>
+<p>Easy. Just add <code>-D/--daemon</code> to your <code>gunicorn</code> arguments.</p>
+<pre><code>gunicorn -D hello_world:app
+</code></pre>
+<p>How do you kill it?</p>
+<pre><code>killall gunicorn
+</code></pre>
+<p>What if you just want to reload your app after pulling some changes?</p>
+<pre><code>killall -HUP gunicorn
+</code></pre>
+<h4>Issue #3</h4>
+<p>Another easy one. Add arguments <code>--access-logfile FILE</code> for access logs and
+<code>--error-logfile FILE</code> for error logs. You can set <code>FILE</code> to <code>-</code> to write to
+<code>stderr</code>.</p>
+<p><code>gunicorn</code> accepts config files so you don’t have to write these arguments
+down everytime.</p>
+<pre><code>daemon = True
+accesslog = "logs/access.log"
+errorlog = "logs/error.log"
+</code></pre>
+<p>Save this as <code>gunicorn.conf.py</code> and tell Gunicorn to use it as its config
+file.</p>
+<pre><code>gunicorn -c gunicorn.conf.py hello_world:app
+</code></pre>
+<p>Gunicorn has a bunch of other configuration options you can find
+<a href="http://docs.gunicorn.org/en/develop/configure.html">here</a>.</p>
+<h3>Recap</h3>
+<p>By now you should know how to:</p>
+<ol>
+<li>Create a droplet and access it</li>
+<li>Create <code>virtualenv</code>s and install Python packages within them</li>
+<li>Run Flask apps with Gunicorn</li>
+<li>Setup Nginx as a reverse proxy for Gunicorn</li>
+<li>Configure and run Gunicorn as a daemon process</li>
+</ol>
+<p>You do? Then that’s it! A simple deployment flow for your Flask apps in
+DigitalOcean droplets. If you have questions and/or recommendations, feel free
+to tweet me. I’m <a href="https://twitter.com/themarksteve">@themarksteve</a>.</p>
+
+
+  </div>

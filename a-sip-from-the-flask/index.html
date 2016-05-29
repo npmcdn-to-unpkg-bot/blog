@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+  <title>Pardon my PHP</title>
+  <script src="https://use.typekit.net/ixq4oeo.js"></script>
+  <script>try{Typekit.load({ async: true });}catch(e){}</script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css">
+  <link rel="stylesheet" href="//npmcdn.com/basscss@8.0.1/css/basscss.min.css">
+  <style>
+    body { font: 20px/1.5 franklin-gothic-urw, sans-serif; }
+    h1, h2, h3, h4, h5, h6, blockquote { font-family: essonnes-display; }
+    blockquote { margin: 0; padding: 0 1.5em; }
+    pre { background: #eee; overflow-y: auto; padding: .5em; }
+    code { background: #eee; font-family: inconsolata, monospace; }
+    img { max-width: 100%; }
+    a { color: #3d9970; }
+    a:visited { color: #aaa; }
+    h1 a, h2 a { color: inherit; text-decoration: none; }
+    h1 a:visited, h2 a:visited { color: inherit; }
+  </style>
+<body>
+  <div class="max-width-3 mx-auto p2">
+    <h1 class="regular border-bottom flex flex-wrap justify-between items-baseline">
+      <a class="lg-col-6 col-12" href="/">Pardon my <em>php</em></a>
+      <span class="h4 lg-col-6 col-12 right-align">
+        Ramblings from a web developer
+      </span>
+    </h1>
+    
+  <h2 class="mb0">A sip from the Flask</h2>
+  <p class="mt0">
+    <small>Published on 2014-10-28</small>
+  </p>
+  <p>I had to do a Flask workshop last weekend for the anniversary of a local
+Python users group. I’ve done a few introductory presentations for Flask
+before but I’ve always hated running my examples. Normally I’ll have 3 windows
+open: the presentation, my editor and a terminal. It’s a chore to switch
+through them and very error prone. So I thought about how to do it better.
+Turns out the solution was right in front of me. I was already running my
+presentation’s Flask app inside a docker container. Why not do that as well
+for all my examples? Using <a href="https://github.com/docker/docker-py">docker-py</a>, I
+ran the examples inside containers using random ports and added them to the
+presentation with <code>iframes</code>. Sweet and simple. You can check it out here:
+<a href="http://asftf.marksteve.com">http://asftf.marksteve.com</a></p>
+
+
+  </div>

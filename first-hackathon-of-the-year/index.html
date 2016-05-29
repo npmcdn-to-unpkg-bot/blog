@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<head>
+  <title>Pardon my PHP</title>
+  <script src="https://use.typekit.net/ixq4oeo.js"></script>
+  <script>try{Typekit.load({ async: true });}catch(e){}</script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css">
+  <link rel="stylesheet" href="//npmcdn.com/basscss@8.0.1/css/basscss.min.css">
+  <style>
+    body { font: 20px/1.5 franklin-gothic-urw, sans-serif; }
+    h1, h2, h3, h4, h5, h6, blockquote { font-family: essonnes-display; }
+    blockquote { margin: 0; padding: 0 1.5em; }
+    pre { background: #eee; overflow-y: auto; padding: .5em; }
+    code { background: #eee; font-family: inconsolata, monospace; }
+    img { max-width: 100%; }
+    a { color: #3d9970; }
+    a:visited { color: #aaa; }
+    h1 a, h2 a { color: inherit; text-decoration: none; }
+    h1 a:visited, h2 a:visited { color: inherit; }
+  </style>
+<body>
+  <div class="max-width-3 mx-auto p2">
+    <h1 class="regular border-bottom flex flex-wrap justify-between items-baseline">
+      <a class="lg-col-6 col-12" href="/">Pardon my <em>php</em></a>
+      <span class="h4 lg-col-6 col-12 right-align">
+        Ramblings from a web developer
+      </span>
+    </h1>
+    
+  <h2 class="mb0">First Hackathon of the Year</h2>
+  <p class="mt0">
+    <small>Published on 2014-05-11</small>
+  </p>
+  <p>I love going to hackathons. They’re like slumber party tournaments. I actually
+like hackathons that let you code during daytime more but that’s for another
+blog post.</p>
+<p>(Oh just got an idea. HACKATHON IN A CAMP!)</p>
+<p>Anways, our entry to yesterday’s Tech Camp Hackathon at Globe Labs was
+<a href="http://kuwago.marksteve.com/">KUWAGO</a>.</p>
+<p>Don’t mind the units and values. They’re just random sample data :P The app
+basically shows a dashboard that LGUs can monitor, for them to make decisions
+in disaster situations. The idea is that the dashboard will be able to pull
+from several normalized APIs and render visualizations that are concise and
+easy to digest. There are 3 panels for every monitored value. First one is a
+time-series graph that shows you the trend of the value monitored. This is
+useful for answering questions like “Is it getting any worse?” or “How much
+time do we have before we ask people to evacuate?”. Second panel shows the
+current value and the threshold value. Last one shows an
+evaluation/recommendation based from the difference of the current value from
+the threshold value.</p>
+<p>Most data available from other monitoring sites show raw values that are not
+usually enough to make out the situation. In our project, there’s an
+assumption that the values returned by the queried APIs are enough to make
+meaningful deductions. So data coming has to be processed such that they can
+give a better picture of the situation.</p>
+<p>Also, if you’ve checked our entry out, you’ll notice that the values are
+updated every 3 seconds. This was to show that it was realtime. This kind of
+measurements are usually measured every X minutes/hours. We sped it up for
+presentation.</p>
+<p>So we had Friday night until Saturday noon to build this. My awesome partner
+<a href="http://katpadi.ph/">Kat Padi</a> did the dummy REST APIs in PHP while I worked
+on the frontend using React and jQuery. (I just realized that React was really
+good for prototyping things.) It was a relatively easy simple app so Kat was
+able to go back her apartment near the venue and I was able to sleep with the
+beanbags there at around 3am. Added the finishing touches after breakfast and
+we were done.</p>
+<p>One of the things I’ve learned from the other hackathons I’ve been too is to
+plan for the smallest feature set you’d be happy with and make it as polished
+looking as you can. Another one is to use the tools you’re already comfortable
+with. Don’t go playing around with some tech that seems to be the perfect fit
+for what you’re building if you have nil experience about it. Use something
+you know well. This was Kat’s first hackathon so I was telling her about these
+tips sounding like an old veteran :P</p>
+<p><a href="https://svbtleusercontent.com/jvtgzayqigndla.jpg"><img src="https://svbtleusercontent.com/jvtgzayqigndla_small.jpg" alt="BnQox5iCMAAlQux.jpg"></a><br>
+<a href="https://svbtleusercontent.com/dwkwc3kjvjeq2a.jpg"><img src="https://svbtleusercontent.com/dwkwc3kjvjeq2a_small.jpg" alt="BnQoyJOCMAAs4Yx.jpg"></a></p>
+<p>Both of us presented our entry. Kat did the intro and overview while I talked
+about the details and our motivation. Got a couple of questions from the
+judges which we fortunately didn’t have issues answering. Then we waited
+patiently for judging…</p>
+<p>In 3rd place was “Fans of katpadi” (Yep. My partner had a team named after
+her). They built ERPAT which did building permit assessment and tracking.</p>
+<p>In 2nd place was “DE”. My colleagues at Insync, Justin and Ted, built a mobile
+app and API that enables surveyors to quickly assess structural integrity of
+buildings.</p>
+<p>And we won first place! Moom Manes! (Was also our team name. Haha.)</p>
+<p><a href="https://svbtleusercontent.com/cuul4cggmw8bq.jpg"><img src="https://svbtleusercontent.com/cuul4cggmw8bq_small.
+jpg" alt="2014-05-10 17.59.13.jpg"></a></p>
+<p>Got a grant from USAID and some good goodies from GDG and Globe Labs. Another
+fun hackathon experience. There will be more for this year but this was
+definitely an awesome first one.</p>
+<p><a href="https://svbtleusercontent.com/ywbt4omfrpw5ja.jpg"><img src="https://svbtleusercontent.com/ywbt4omfrpw5ja_small.jpg" alt="BnQ73icCcAAQ1_w.jpg"></a></p>
+<p><em>Credits to @globelabs for all photos except for the one with just me and Kat</em></p>
+
+
+  </div>
