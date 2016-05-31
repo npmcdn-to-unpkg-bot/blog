@@ -1,6 +1,6 @@
 ---
 publish_date: '2016-04-09'
-title: Feel Good
+title: Feel good
 ---
 
 I’m now back to 75kg and just finished my climbing project, a 5.10a route,

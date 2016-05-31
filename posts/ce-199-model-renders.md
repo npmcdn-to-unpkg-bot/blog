@@ -1,6 +1,6 @@
 ---
 publish_date: '2014-04-02'
-title: CE 199 Model Renders
+title: CE 199 model renders
 ---
 
 For my thesis, I “designed” a testing facility for masonry panels. Notice the

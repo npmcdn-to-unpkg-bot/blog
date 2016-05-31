@@ -1,6 +1,6 @@
 ---
 publish_date: '2014-05-05'
-title: Unluckiest Streak
+title: Unluckiest streak
 ---
 
 [![wtf.png](https://svbtleusercontent.com/jmotbd2iav8og_small.png)](https://sv
@@ -22,7 +22,7 @@ Radiant base and disconnected players. But there was no scoreboard. Doesn’t
 seem like Dire creeps were jumping in joy as well. Our game session got
 trashed and wasn’t recorded. WTF.
 
-Update:  
+Update:
 [![wew.png](https://svbtleusercontent.com/f99fqhqdbilhiw_small.png)](https://s
 vbtleusercontent.com/f99fqhqdbilhiw.png)
 

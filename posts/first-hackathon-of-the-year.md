@@ -1,6 +1,6 @@
 ---
 publish_date: '2014-05-11'
-title: First Hackathon of the Year
+title: First hackathon of the year
 ---
 
 I love going to hackathons. They’re like slumber party tournaments. I actually
@@ -52,7 +52,7 @@ you know well. This was Kat’s first hackathon so I was telling her about these
 tips sounding like an old veteran :P
 
 [![BnQox5iCMAAlQux.jpg](https://svbtleusercontent.com/jvtgzayqigndla_small.jpg
-)](https://svbtleusercontent.com/jvtgzayqigndla.jpg)  
+)](https://svbtleusercontent.com/jvtgzayqigndla.jpg)
 [![BnQoyJOCMAAs4Yx.jpg](https://svbtleusercontent.com/dwkwc3kjvjeq2a_small.jpg
 )](https://svbtleusercontent.com/dwkwc3kjvjeq2a.jpg)
 

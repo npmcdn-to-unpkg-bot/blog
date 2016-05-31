@@ -1,6 +1,6 @@
 ---
 publish_date: '2016-05-31'
-title: Back to Basics
+title: Back to basics
 ---
 
 Yet another blog rewrite! This time I'm going back to basics:
