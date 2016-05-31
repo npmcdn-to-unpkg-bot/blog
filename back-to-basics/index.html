@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+  <title>Pardon my php</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:title" content="Pardon my php - Mark Steve Samson">
+  <meta property="og:image" content="https://marksteve.com/static/opengraph.png">
+  <script src="https://use.typekit.net/ixq4oeo.js"></script>
+  <script>try{Typekit.load({ async: true });}catch(e){}</script>
+  <link rel="shortcut icon" href="https://marksteve.com/static/favicon.ico">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css">
+  <link rel="stylesheet" href="//npmcdn.com/basscss@8.0.1/css/basscss.min.css">
+  <link rel="stylesheet" href="/assets/styles.css">
+<body>
+  <main class="max-width-3 mx-auto p2">
+    <header class="border-bottom py1 flex flex-wrap justify-between items-baseline">
+      <h1 class="h2 regular lg-col-6 col-12 mb0">
+        <a href="/">Pardon my <em>php</em></a>
+      </h1>
+      <small class="lg-col-6 col-12 right-align">
+        Work and life. Code and climb.
+      </small>
+    </header>
+    
+  <h2 class="h1 mb0 center">Back to Basics</h2>
+  <p class="mt0 center">
+    <small>Published on 2016-05-31</small>
+  </p>
+  <p>Yet another blog rewrite! This time I'm going back to basics:</p>
+<pre><code>(master)⚡ % cat blog.py | wc -l
+     159
+</code></pre>
+<p>Nothing fancy. My goal was to make it simple and flexible, like Jekyll when it first started working out. It's basically glue code for a handful of excellent Python packages:</p>
+<ul>
+<li><strong>click</strong> - CLI action</li>
+<li><strong>python-frontmatter</strong> -  Metadata handling</li>
+<li><strong>jinja2</strong> - So I don't need to type things over and over again</li>
+<li><strong>mistune</strong> - Everybody loves markdown</li>
+<li><strong>gitpython</strong> - For deploying to gh-pages</li>
+</ul>
+<p>It honestly took more time to make it pretty than to code it. You can check it out in <a href="https://github.com/marksteve/blog">GitHub</a>. Right now, it can only handle markdown files. In the future, I want it to handle arbitrary html so I can do fancy schmancy javascript.</p>
+
+
+    <footer class="border-top py1 mt4 center">
+      <small>
+        Headings: Abril Display, Body: Franklin Gothic URW, Monospace: Inconsolata
+      </small>
+    </footer>
+  </main>
