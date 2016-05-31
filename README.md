@@ -29,9 +29,9 @@ Not for public consumption but suit yourself:
 
 ```
 virtualenv venv
-mkdir {build,assets}
 venv/bin/pip install -r requirements.txt
-venv/bin/python blog.py
+mkdir {build,assets}
+./blog.py
 ```
 
 
