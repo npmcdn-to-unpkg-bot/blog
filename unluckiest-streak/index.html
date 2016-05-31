@@ -6,32 +6,35 @@
   <script>try{Typekit.load({ async: true });}catch(e){}</script>
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css">
   <link rel="stylesheet" href="//npmcdn.com/basscss@8.0.1/css/basscss.min.css">
-  <link rel="stylesheet" href="//s3-us-west-2.amazonaws.com/colors-css/2.2.0/colors.min.css">
   <style>
-    body { font: 20px/1.5 franklin-gothic-urw, sans-serif; }
+    * { text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    body { font: 20px/1.5 franklin-gothic-urw, sans-serif; color: #222; }
     h1, h2, h3, h4, h5, h6, blockquote { font-family: essonnes-display; }
+    h1, h2, h3, h4, h5, h6 { color: #26587c; }
     blockquote { margin: 0; padding: 0 1.5em; }
     pre { background: #eee; overflow-y: auto; padding: .5em; }
     code { background: #eee; font-family: inconsolata, monospace; }
     img { max-width: 100%; }
-    a { color: #3d9970; }
-    a:visited { color: #aaa; }
+    a { color: #3d996f; }
+    a:visited { color: #61b38e; }
+    a:hover { color: #238659; }
     h1 a, h2 a { color: inherit; text-decoration: none; }
     h1 a:visited, h2 a:visited { color: inherit; }
+    header, footer { color: #94b5cc; }
   </style>
 <body>
-  <div class="max-width-3 mx-auto p2">
+  <main class="max-width-3 mx-auto p2">
     <header class="border-bottom flex flex-wrap justify-between items-baseline">
-      <h1 class="regular lg-col-6 col-12 mb0">
+      <h1 class="h2 regular lg-col-6 col-12 mb0">
         <a href="/">Pardon my <em>php</em></a>
       </h1>
-      <div class="lg-col-6 col-12 right-align">
-        Ramblings from a web developer
-      </div>
+      <small class="lg-col-6 col-12 right-align">
+        Work and life. Code and climb.
+      </small>
     </header>
     
-  <h2 class="mb0">Unluckiest Streak</h2>
-  <p class="mt0">
+  <h2 class="h1 mb0 center">Unluckiest Streak</h2>
+  <p class="mt0 center">
     <small>Published on 2014-05-05</small>
   </p>
   <p><a href="https://sv
@@ -57,9 +60,9 @@ vbtleusercontent.com/f99fqhqdbilhiw.png"><img src="https://svbtleusercontent.com
 <p>Thank you Valve!</p>
 
 
-    <footer class="border-top mt4">
+    <footer class="border-top mt4 center">
       <small>
         Headings: Essonnes Display, Body: Franklin Gothic URW, Monospace: Inconsolata
       </small>
     </footer>
-  </div>
+  </main>
