@@ -1,3 +1,5 @@
+#!./venv/bin/python
+
 import feedparser
 import frontmatter
 from html2text import html2text
