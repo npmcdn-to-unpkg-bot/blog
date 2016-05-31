@@ -18,4 +18,4 @@ Nothing fancy. My goal was to make it simple and flexible, like Jekyll when it f
 - __mistune__ - Everybody loves markdown
 - __gitpython__ - For deploying to gh-pages
 
-It honestly took more time to make it pretty than to code it. You can check it out in [GitHub](https://github.com/marksteve/blog). Right now, it can only handle markdown files. In the future, I want it to handle arbitrary html so I can do fancy schmancy javascript.
+It honestly took more time to make it pretty than to code it. You can check it out in [GitHub](https://github.com/marksteve/blog). Right now, it can only handle plain markdown files. In the future, I want it to render [literate code](https://en.wikipedia.org/wiki/Literate_programming) so I can do fancy schmancy javascript walkthroughs.
