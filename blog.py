@@ -9,8 +9,14 @@ from jinja2 import Environment, FileSystemLoader
 
 import click
 import frontmatter
+import renderers
 from git import Repo
 from git.exc import GitCommandError
+
+
+def get_markdown(path):
+    renderer = renderers.get_from_path(path)
+    return mistune.Markdown(renderer=renderer)
 
 
 class Post(object):
@@ -33,7 +39,7 @@ class Post(object):
 
     def render(self):
         if self.source.endswith('.md'):
-            return mistune.markdown(self.content)
+            return get_markdown(self.path)(self.content)
         raise NotImplementedError
 
 
@@ -157,3 +163,4 @@ def deploy(ctx, message):
 
 if __name__ == '__main__':
     cli()
+

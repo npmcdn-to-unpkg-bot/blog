@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+  <title>Pardon my php &mdash; {{ post.metadata.title }}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:title" content="Pardon my php - Mark Steve Samson">
+  <meta property="og:image" content="https://marksteve.com/static/opengraph.png">
+  <script src="https://use.typekit.net/ixq4oeo.js"></script>
+  <script>try{Typekit.load({ async: true });}catch(e){}</script>
+  <link rel="shortcut icon" href="https://marksteve.com/static/favicon.ico">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css">
+  <link rel="stylesheet" href="//npmcdn.com/basscss@8.0.1/css/basscss.min.css">
+  <link rel="stylesheet" href="/assets/2014.css">
+<body>
+  <main class="p2">
+    <header class="border-bottom flex flex-wrap justify-between items-baseline">
+      <h1 class="h2 regular lg-col-6 col-12 mb0">
+        <a href="/">Pardon my <em>php</em></a>
+      </h1>
+      <small class="lg-col-6 col-12 right-align">
+        Work and life. Code and climb.
+      </small>
+    </header>
+    <h2 class="h1 mb0 center">{{ post.metadata.title }}</h2>
+    <p class="mt0 center">
+      <small>Published on {{ post.metadata.publish_date }}</small>
+    </p>
+    <div class="container mx-auto">
+      {{ post }}
+    </div>
+  </main>
+  <script src="/assets/bricks.min.js"></script>
+  <script src="/assets/2014.js"></script>
+
