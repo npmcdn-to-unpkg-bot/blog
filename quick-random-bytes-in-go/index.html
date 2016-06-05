@@ -28,7 +28,7 @@
     <small>Published on 2014-09-23</small>
   </p>
   <p>I wanted to generate random IDs for some database entries I was storing:</p>
-<pre><code>import (
+<pre class="microlight"><code>import (
   "math/rand"
   "time"
 )
@@ -42,7 +42,7 @@ func GenID() string {
 </code></pre>
 <p>Obviously, we can do better. I suck at math so I’ll just trust this package
 some Googler wrote:</p>
-<pre><code>import "github.com/dustin/randbo"
+<pre class="microlight"><code>import "github.com/dustin/randbo"
 
 func GenID(l int) string {
   p := make([]byte, l)
@@ -58,3 +58,4 @@ func GenID(l int) string {
       </small>
     </footer>
   </main>
+  <script src="/assets/microlight.js"></script>

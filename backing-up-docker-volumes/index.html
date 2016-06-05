@@ -41,7 +41,7 @@ and some good soul told me about how volumes are exempted from the container’s
 filesystem when exported. He also gave me a tip: link the volume to the
 container and tar it up. Which kinda looks like this if you do it from the
 docker cli:</p>
-<pre><code>#!/bin/bash
+<pre class="microlight"><code>#!/bin/bash
 sudo docker run -rm -i -volumes-from ghost-mysql ubuntu tar -cz /var/lib/mysql &gt; ~/backups/ghost-mysql-`date +%s`.tgz
 </code></pre>
 <p>Good thing I suck at blogging and only have three measly posts. Also,
@@ -56,3 +56,4 @@ my container volumes. All’s well that ends well.</p>
       </small>
     </footer>
   </main>
+  <script src="/assets/microlight.js"></script>
