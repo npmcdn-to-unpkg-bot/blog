@@ -48,7 +48,7 @@ class Blog(object):
     def __init__(self, **config):
         self.config = config
         self.config.setdefault('posts_dir', './posts')
-        self.config.setdefault('layouts_dir', './layouts')
+        self.config.setdefault('templates_dir', './templates')
         self.config.setdefault('assets_dir', './assets')
         self.config.setdefault('build_dir', './build')
         self.config.setdefault('remote_branch', 'gh-pages')
@@ -56,7 +56,7 @@ class Blog(object):
                                'git@github.com:marksteve/blog.git')
         self.config.setdefault('cname_host', 'blog.marksteve.com')
         self.env = Environment(
-            loader=FileSystemLoader(self.config['layouts_dir']),
+            loader=FileSystemLoader(self.config['templates_dir']),
         )
 
     def write_posts(self):
@@ -80,8 +80,8 @@ class Blog(object):
         return post
 
     def render_post(self, post):
-        layout = post.metadata.get('layout', 'default.html')
-        template = self.env.get_template(layout)
+        template_path = post.metadata.get('template', 'default.html')
+        template = self.env.get_template(template_path)
         return template.render(post=post)
 
     def write_index(self, posts):
